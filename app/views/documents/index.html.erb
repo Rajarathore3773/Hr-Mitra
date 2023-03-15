@@ -1,0 +1,49 @@
+<div class="col-lg-12">
+<%= flash[:notice]%>
+    <div class="card rounded-0 mt-5 mb-5">
+        <div class="card-body">
+            <h2 class="text-center"> Listing Documents </h2>
+        </div>
+    </div>
+    <%= link_to "Create New document", new_document_path, class: "btn btn-primary btn-lg mb-4 "%>
+    <table class ="table table-bordered text-center">
+        <thead>
+            <tr>
+                    <th>Name</th>
+                    <th>Doc Type</th>
+                    <th>document</th>
+                    <th>Action</th>
+            </tr>
+    </thead>
+        <tbody>
+            <% @documents.each  do |document|%>
+                <tr>
+                    <td><%= document.name%></td>
+                    <td><%= document.doc_type%></td>
+                    <!--<td><%= document.employee.name%></td> -->
+                    <td><%=link_to document.employee.name, employee_path(document.employee)%></td>
+                    <td>
+            <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Actions
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><%= link_to "Edit", edit_document_path(document), class: "dropdown-item "%></li>
+                <li><%= link_to "View", document_path(document), class: "dropdown-item"%></li>
+                <li><%= link_to "Delete", document_path(document), class: "dropdown-item", method: :delete, data: {confirm: "Are You sure delete this document?"}%></li>
+            </ul>
+            </div>
+ <!--   Button(edit / view / delete) dene ka another way         
+ <%= link_to "View", document_path(document), class: "btn btn-info btn-lg mb-4"%>
+
+<%= link_to "Delete", document_path(document), class: "btn btn-danger btn-lg mb-4", method: :delete, data: {confirm: "Are You sure delete this document?"}%>
+<%= link_to "Edit", edit_document_path(document), class: "btn btn-primary btn-lg mb-4"%>
+-->
+            </td>
+
+                </tr>
+            <%end%>
+        </tbody>
+    </table>
+
+</div>
